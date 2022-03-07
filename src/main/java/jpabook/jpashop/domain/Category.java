@@ -21,7 +21,7 @@ public class Category {
 
     private String name;
 
-    @ManyToMany//@ManyToMany : 실무에서 사용 지양
+    @ManyToMany//@ManyToMany : 실무에서 사용 지양(중간테이블에 fk값 말고 다른 값을 넣을 수 없음)
     @JoinTable(name="category_item", //1:* - category_item(중간테이블) - *:1
             joinColumns = @JoinColumn(name = "category_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id"))

@@ -23,11 +23,11 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne(fetch = LAZY)//연관관계주인, 실무에서 FetchType.EAGER 쓰면 안됨!
+    @ManyToOne(fetch = LAZY)//연관관계주인, 실무에서 FetchType.EAGER 쓰면 안됨(JPQL 실행시 N+1 문제 발생)! -> 무조건 지연로딩으로 설정
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)//거울
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)//거울, CascadeType.ALL : order만 persist해도 orderItems도 persist해줌
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)//연관관계주인
@@ -39,7 +39,8 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status; //주문상태 [ORDER, CANCEL]
 
-    //=연관관계 편의 메서드=//
+    //=연관관계 편의 메서드=// : 양방향 관계일경우 양쪽에 다 세팅되도록 묶어주는 메서드,
+                          // 양쪽 중 핵심적으로 컨트롤 하는 쪽에 메서드를 넣어주면 좊음
     public void setMember(Member member) {
         this.member = member;
         member.getOrders().add(this);
