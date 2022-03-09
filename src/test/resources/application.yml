@@ -8,7 +8,7 @@ spring:
 #
 #  jpa:
 #    hibernate:
-#      ddl-auto: create-drop #이미 있으면 drop하고 create함 그리고 종료 전에 다 drop함
+#      ddl-auto: create-drop #이미 있으면 drop하고 create함 그리고 종료 전에 다 drop함, 스프링부트는 기본적으로 create-drop임
 #    properties:
 #      hibernate:
 #        format_sql: true

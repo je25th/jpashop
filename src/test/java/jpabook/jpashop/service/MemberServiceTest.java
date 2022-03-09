@@ -14,9 +14,9 @@ import javax.persistence.EntityManager;
 
 import static org.junit.Assert.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@Transactional
+@RunWith(SpringRunner.class)//Junit 실행할 때 스프링이랑 엮어서 실행할래!(Junit5에서는 필요없응ㅁ)
+@SpringBootTest//스프링 컨테이너 안에서 테스트를 돌릴래!
+@Transactional//@Test에서 트랜젝션 어노테이션을 사용하면 기본적으로 롤백함(다른곳에서는 롤백 안함)
 public class MemberServiceTest {
 
     @Autowired MemberService memberService;
