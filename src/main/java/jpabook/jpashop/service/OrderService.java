@@ -31,8 +31,8 @@ public class OrderService {
     public Long order(Long memberId, Long itemId, int count) {
 
         //엔티티 조회
-        Member member = memberRepository.findOne(memberId);
-        Item item = itemRepository.findOne(itemId);
+        Member member = memberRepository.findOne(memberId);//영속상태
+        Item item = itemRepository.findOne(itemId);//영속상태
 
         //배송정보 생성
         Delivery delivery = new Delivery();
@@ -45,7 +45,8 @@ public class OrderService {
         Order order = Order.createOrder(member, delivery, orderItem);
 
         //주문 저장
-        orderRepository.save(order);//OrderItem과 Delivery에 CascadeType.All이 걸려있기 때문에 Order persist 할때 같이 다 persist됨
+        orderRepository.save(order);// OrderItem과 Delivery에 CascadeType.All이 걸려있기 때문에 Order persist 할때 같이 다 persist됨
+                                    // persist해야하는 라이프사이클이 완전히 동일한 경우에만 CascadeType.All을 사용하자
 
         return order.getId();
     }
@@ -56,9 +57,9 @@ public class OrderService {
     @Transactional
     public void cancelOrder(Long orderId) {
         //주문 엔티티 조회
-        Order order = orderRepository.findOne(orderId);
+        Order order = orderRepository.findOne(orderId);//영속상태
         //주문 취소
-        order.cancel();
+        order.cancel();//트랜젝션 안에서 데이터를 변경한거를 JPA가 추적하여 update 날려줌(더티체킹==변경내역감지)
     }
 
     //검색

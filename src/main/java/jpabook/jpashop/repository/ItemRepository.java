@@ -17,7 +17,8 @@ public class ItemRepository {
         if (item.getId() == null) {
             em.persist(item);
         } else {
-            em.merge(item);//모든 필드를 item로 바꿔치기함
+            Item merge = em.merge(item);//모든 필드를 item로 바꿔치기함
+                                        // item은 여전히 준영속상태, 반환된 merge는 영속상태
         }
     }
 

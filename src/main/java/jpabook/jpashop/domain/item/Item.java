@@ -27,6 +27,7 @@ public class Item {
     private List<Category> categories = new ArrayList<>();
 
     //==비즈니스 로직==//
+    //데이터를 갖고있는 객체에 비즈니스 메서드가 있는게 응집력이 있어 객체지향적으로 관리하기 더 좋다
 
     /**
      * stock 증가

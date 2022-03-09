@@ -13,7 +13,7 @@ import static javax.persistence.FetchType.*;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)//protected 생성자 만들어줌
+@NoArgsConstructor(access = AccessLevel.PROTECTED)//protected 생성자 만들어줌(생성자로 인스턴트 생성 못하도록 막기위함, 생성메스드를 사용하도록 유도)
 public class OrderItem {
 
     @Id
