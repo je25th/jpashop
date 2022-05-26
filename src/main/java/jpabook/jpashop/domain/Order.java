@@ -27,7 +27,7 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "order"/*, cascade = CascadeType.ALL*/)//거울, CascadeType.ALL : order만 persist해도 orderItems도 persist해줌
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)//거울, CascadeType.ALL : order만 persist해도 orderItems도 persist해줌
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)//연관관계주인
