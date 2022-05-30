@@ -23,6 +23,7 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
+                            //LAZY로 해두면 가짜로 프록시 객체를 넣어둠
     @ManyToOne(fetch = LAZY)//연관관계주인, 실무에서 FetchType.EAGER 쓰면 안됨(JPQL 실행시 N+1 문제 발생)! -> 무조건 지연로딩으로 설정
     @JoinColumn(name = "member_id")
     private Member member;
