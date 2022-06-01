@@ -98,4 +98,13 @@ public class OrderRepository {
     public void saveOrderItem(OrderItem orderItem) {
         em.persist(orderItem);
     }
+
+    //Lazy 설정 무시하고 다 가져옴 = fetch join
+    public List<Order> findAllWithMemberDelivery() {
+         return em.createQuery(
+                "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class
+        ).getResultList();
+    }
 }
