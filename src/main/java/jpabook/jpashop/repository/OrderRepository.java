@@ -107,4 +107,19 @@ public class OrderRepository {
                         " join fetch o.delivery d", Order.class
         ).getResultList();
     }
+
+    public List<Order> findAllWithItem() {
+        //JPA의 distinct는
+        // 1. SQL에 distinct를 추가하고,
+        // 2. 같은 엔티티가 조회되면 애플리케이션에서 중복을 걸러줌
+        //1:N fetch join(컬렉션 페치 조인)
+        // - 컬렉션 페치 조인을 쓰면 페이징이 불가능!!(메모리에서 페이징 하기 때문에 페이징 쓰면 안됨)
+        // - 컬렉션 페치 조인은 1개만 사용할 수 있음(그렇게 해야함)
+        return em.createQuery(
+                "select distinct o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d" +
+                        " join fetch o.orderItems oi", Order.class)
+                .getResultList();
+    }
 }
