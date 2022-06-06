@@ -12,6 +12,7 @@ spring:
       hibernate:
 #        show_sql: true #System.out으로 찍어줌
         format_sql: true
+        default_batch_fetch_size: 100 #in 쿼리로 한번에 100개씩 가져옴(pk기반으로 in 절을 날리는것이기때문에 빠르다)
 
 logging:
   level:
